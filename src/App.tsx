@@ -1,9 +1,8 @@
-import { Button, Table } from 'react-bootstrap';
 import Insumos from './components/insumos/Insumos';
 
 function App() {
   return (
-    <div>
+    <div className='mx-5 my-5'>
       <Insumos />
     </div>
   );
