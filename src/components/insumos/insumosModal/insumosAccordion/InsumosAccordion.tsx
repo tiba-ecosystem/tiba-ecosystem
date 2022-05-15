@@ -16,8 +16,6 @@ export interface IInsumosAccordion {
   costoUnidad: string,
   largoInsumo: string,
   altoInsumo: string,
-  unidadMedidaLargo: string,
-  unidadMedidaAlto: string,
   handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void,
   handleDropdowns: (event: React.ChangeEvent<HTMLSelectElement>) => void, 
 }
@@ -29,8 +27,6 @@ const InsumosAccordion = ({...props}: IInsumosAccordion) => {
     costoUnidad,
     altoInsumo,
     largoInsumo,
-    unidadMedidaLargo,
-    unidadMedidaAlto,
     handleInputs,
     handleDropdowns
   } = props;
@@ -50,8 +46,6 @@ const InsumosAccordion = ({...props}: IInsumosAccordion) => {
         costoUnidad,
         altoInsumo,
         largoInsumo,
-        unidadMedidaLargo,
-        unidadMedidaAlto,
         handleInputs,
         handleDropdowns
       }} />

@@ -132,8 +132,6 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
             largoInsumo,
             altoInsumo,
             handleInputs,
-            unidadMedidaLargo,
-            unidadMedidaAlto,
             handleDropdowns
           }} />
 
