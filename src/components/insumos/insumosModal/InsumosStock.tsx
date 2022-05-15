@@ -1,22 +1,13 @@
-import { useState } from "react";
 import { Form } from "react-bootstrap"
 
-const InsumosStock = () => {
-  const [stockInsumo, setStockInsumo] = useState<string>("");
-  const [stockMinimoInsumo, setStockMinimoInsumo] = useState<string>("");
+interface IInsumosStock {
+  stockInsumo: string,
+  stockMinimoInsumo: string,
+  handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
 
-  const handleInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-
-    switch (event.target.name) {
-      case "stockInsumo": setStockInsumo(inputValue); 
-        break;
-      case "stockMinimoInsumo": setStockMinimoInsumo(inputValue); 
-        break;
-      default: throw Error("Input doesn't exist");
-    }
-  }
-
+const InsumosStock = ({...props}: IInsumosStock) => {
+  const {stockInsumo, stockMinimoInsumo, handleInputs} = props;
   return (
     <div className="mt-3">
       <Form.Group className="mb-3" controlId="formGridAddress2">

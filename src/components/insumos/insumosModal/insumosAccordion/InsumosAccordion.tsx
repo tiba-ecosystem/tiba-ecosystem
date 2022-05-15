@@ -1,6 +1,6 @@
 import React from "react";
 import { Accordion } from "react-bootstrap"
-import InsumoRespectoCantidadesForm from "./InsumoRespectoCantidadesForm";
+import InsumoRespectoCantidades from "./InsumoRespectoCantidades";
 import InsumoRespectoLongitud from "./InsumoRespectoLongitud";
 import InsumoRespectoPesoForm from "./InsumoRespectoPeso";
 import InsumoRespectoVolumen from "./InsumoRespectoVolumen";
@@ -14,21 +14,47 @@ export interface IInsumosAccordion {
   cantidades: string,
   costoInsumo: string,
   costoUnidad: string,
-  handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void
+  largoInsumo: string,
+  altoInsumo: string,
+  unidadMedidaLargo: string,
+  unidadMedidaAlto: string,
+  handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  handleDropdowns: (event: React.ChangeEvent<HTMLSelectElement>) => void, 
 }
 
 const InsumosAccordion = ({...props}: IInsumosAccordion) => {
-  const {cantidades, costoInsumo, costoUnidad, handleInputs} = props;
+  const {
+    cantidades,
+    costoInsumo,
+    costoUnidad,
+    altoInsumo,
+    largoInsumo,
+    unidadMedidaLargo,
+    unidadMedidaAlto,
+    handleInputs,
+    handleDropdowns
+  } = props;
+
   return (
     <Accordion defaultActiveKey="0">
-      <InsumoRespectoCantidadesForm {...{
+      <InsumoRespectoCantidades {...{
         cantidades,
         costoInsumo,
         costoUnidad,
         handleInputs
       }}/>
       <InsumoRespectoPesoForm />
-      <InsumoRespectoLongitud />
+      <InsumoRespectoLongitud {...{
+        cantidades,
+        costoInsumo,
+        costoUnidad,
+        altoInsumo,
+        largoInsumo,
+        unidadMedidaLargo,
+        unidadMedidaAlto,
+        handleInputs,
+        handleDropdowns
+      }} />
       <InsumoRespectoVolumen />
     </Accordion>
   )

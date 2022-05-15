@@ -1,6 +1,37 @@
 import { Accordion, Col, Form, Row } from "react-bootstrap"
+import InsumoCantidades from "./InsumoCantidades";
 
-const InsumoRespectoLongitud = () => {
+export interface IInsumosRespectoLongitudes {
+  cantidades: string,
+  costoInsumo: string,
+  costoUnidad: string,
+  largoInsumo: string,
+  altoInsumo: string,
+  unidadMedidaLargo: string,
+  unidadMedidaAlto: string
+  handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  handleDropdowns: (event: React.ChangeEvent<HTMLSelectElement>) => void
+}
+
+const InsumoRespectoLongitud = ({...props}: IInsumosRespectoLongitudes) => {
+  const {
+    largoInsumo, 
+    altoInsumo, 
+    cantidades, 
+    costoInsumo, 
+    costoUnidad, 
+    handleInputs,
+    handleDropdowns,
+    unidadMedidaLargo,
+    unidadMedidaAlto 
+  } = props;
+
+  // console.log(largoInsumo, unidadMedidaLargo)
+  // console.log(altoInsumo, unidadMedidaAlto)
+  // console.log("cantidades", cantidades)
+  // console.log("costo insumo", costoInsumo)
+  // console.log("costo unidad", costoUnidad)
+
   return (
     <Accordion.Item eventKey="2">
       <Accordion.Header>Agregar insumo con respecto a su longitud</Accordion.Header>
@@ -8,12 +39,22 @@ const InsumoRespectoLongitud = () => {
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Largo del insumo</Form.Label>
-            <Form.Control type="text" placeholder="Longitud del insumo" />
+            <Form.Control 
+              type="text" 
+              placeholder="Largo del insumo" 
+              name="largoInsumo"
+              defaultValue={largoInsumo} 
+              onChange={handleInputs} 
+            />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Unidad de medida</Form.Label>
-            <Form.Select aria-label="Unidad de medida">
+            <Form.Select 
+              aria-label="Unidad de medida" 
+              id="unidadMedidaLargo" 
+              onChange={handleDropdowns}
+            >
               <option value="pulgadas">pulgadas</option>
               <option value="milimetros">milímetros</option>
               <option value="centimetros">centímetros</option>
@@ -21,15 +62,26 @@ const InsumoRespectoLongitud = () => {
             </Form.Select>
           </Form.Group>
         </Row>
+
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Alto del insumo</Form.Label>
-            <Form.Control type="text" placeholder="Longitud del insumo" />
+            <Form.Control
+              type="text" 
+              placeholder="Alto del insumo" 
+              name="altoInsumo"
+              defaultValue={altoInsumo} 
+              onChange={handleInputs} 
+            />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Unidad de medida</Form.Label>
-            <Form.Select aria-label="Unidad de medida">
+            <Form.Select 
+              aria-label="Unidad de medida"
+              id="unidadMedidaAlto" 
+              onChange={handleDropdowns}
+            >
               <option value="pulgadas">pulgadas</option>
               <option value="milimetros">milímetros</option>
               <option value="centimetros">centímetros</option>
@@ -38,22 +90,12 @@ const InsumoRespectoLongitud = () => {
           </Form.Group>
         </Row>
         
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Cantidades</Form.Label>
-            <Form.Control type="text" placeholder="Cantidades del insumo" />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Costo del insumo</Form.Label>
-            <Form.Control type="text" placeholder="Costo del insumo total" />
-          </Form.Group>            
-        </Row>
-
-        <Form.Group className="mb-3" controlId="formGridAddress1">
-          <Form.Label>Costo por unidad</Form.Label>
-          <Form.Control placeholder="Costo por unidad" />
-        </Form.Group>
+        <InsumoCantidades {...{
+          cantidades,
+          costoInsumo,
+          costoUnidad,
+          handleInputs
+        }} />
       </Accordion.Body>
     </Accordion.Item>
   )

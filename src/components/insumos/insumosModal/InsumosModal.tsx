@@ -10,7 +10,6 @@ interface IModal {
 }
 
 const InsumosModal = ({ showModal, setShowModal }: IModal) => {
-
   const [nombreProveedor, setNombreProveedor] = useState<string>("");
   const [telefono, setTelefono] = useState<string>("");
   const [nombreInsumo, setNombreInsumo] = useState<string>("");
@@ -18,6 +17,12 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
   const [cantidades, setCantidades] = useState<string>("");
   const [costoInsumo, setCostoInsumo] = useState<string>("");
   const [costoUnidad, setCostoUnidad] = useState<string>("");
+  const [stockInsumo, setStockInsumo] = useState<string>("");
+  const [stockMinimoInsumo, setStockMinimoInsumo] = useState<string>("");
+  const [largoInsumo, setLargoInsumo] = useState<string>("");
+  const [altoInsumo, setAltoInsumo] = useState<string>("");
+  const [unidadMedidaLargo, setUnidadMedidaLargo] = useState<string>("");
+  const [unidadMedidaAlto, setUnidadMedidaAlto] = useState<string>("");
 
   const handleInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -36,6 +41,26 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
       case "costoInsumo": setCostoInsumo(inputValue); 
         break;
       case "costoUnidad": setCostoUnidad(inputValue); 
+        break;
+      case "stockInsumo": setStockInsumo(inputValue); 
+        break;
+      case "stockMinimoInsumo": setStockMinimoInsumo(inputValue); 
+        break;
+      case "largoInsumo": setLargoInsumo(inputValue); 
+        break;
+      case "altoInsumo": setAltoInsumo(inputValue); 
+        break;
+      default: throw Error("Input doesn't exist");
+    }
+  }
+
+  const handleDropdowns = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const inputValue = event.target.value;
+
+    switch (event.target.id) {
+      case "unidadMedidaLargo": setUnidadMedidaLargo(inputValue); 
+        break;
+      case "unidadMedidaAlto": setUnidadMedidaAlto(inputValue); 
         break;
       default: throw Error("Input doesn't exist");
     }
@@ -94,7 +119,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
               onChange={handleInputs} 
             />
           </Form.Group>
-          
+
           <InsumosAccordion {...{
             setShowModal, 
             nombreProveedor,
@@ -104,19 +129,41 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
             cantidades,
             costoInsumo,
             costoUnidad,
+            largoInsumo,
+            altoInsumo,
+            handleInputs,
+            unidadMedidaLargo,
+            unidadMedidaAlto,
+            handleDropdowns
+          }} />
+
+          <InsumosStock {...{
+            stockInsumo,
+            stockMinimoInsumo,
             handleInputs
-          }}/>
-          <InsumosStock />
+          }} />
+
           <div className="d-grid gap-2">
             <Button variant="primary" onClick={() => {
               insumosDB.push({
                 nombre: nombreInsumo,
                 categoria: categoriaInsumo,
                 costoUnitario: costoUnidad,
-                stock: "2000",
+                stock: stockInsumo,
                 costoInsumo: costoInsumo,
-                stockMinimo: "100"
-              },)
+                stockMinimo: stockMinimoInsumo
+              })
+              setNombreProveedor("");
+              setTelefono("");
+              setNombreInsumo("");
+              setCategoriaInsumo("");
+              setCantidades("");
+              setCostoInsumo("");
+              setCostoUnidad("");
+              setStockInsumo("");
+              setStockMinimoInsumo("");
+              setUnidadMedidaAlto("");
+              setUnidadMedidaLargo("");
               setShowModal(false)}
             }>
               Agregar Insumo
