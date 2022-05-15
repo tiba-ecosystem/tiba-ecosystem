@@ -1,4 +1,4 @@
-import { Accordion, Button, Col, Form, Row } from 'react-bootstrap'
+import { Accordion, Col, Form, Row } from 'react-bootstrap'
 
 const InsumoRespectoPesoForm = () => {
   return (
@@ -37,12 +37,6 @@ const InsumoRespectoPesoForm = () => {
           <Form.Label>Costo por unidad</Form.Label>
           <Form.Control placeholder="Costo por unidad" />
         </Form.Group>
-      
-        <div className="d-grid gap-2">
-          <Button variant="primary" type="submit">
-            Agregar Insumo
-          </Button>
-        </div>
       </Accordion.Body>
     </Accordion.Item>
   )

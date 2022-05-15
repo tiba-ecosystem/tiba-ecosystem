@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Col, Form, Modal, Row } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { insumosDB } from "../insumosDB";
 import InsumosAccordion from "./insumosAccordion/InsumosAccordion";
+import InsumosStock from "./InsumosStock";
 
 interface IModal {
   showModal: boolean,
@@ -13,6 +15,9 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
   const [telefono, setTelefono] = useState<string>("");
   const [nombreInsumo, setNombreInsumo] = useState<string>("");
   const [categoriaInsumo, setCategoriaInsumo] = useState<string>("");
+  const [cantidades, setCantidades] = useState<string>("");
+  const [costoInsumo, setCostoInsumo] = useState<string>("");
+  const [costoUnidad, setCostoUnidad] = useState<string>("");
 
   const handleInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -26,16 +31,14 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
         break;
       case "categoriaInsumo": setCategoriaInsumo(inputValue); 
         break;
+      case "cantidades": setCantidades(inputValue); 
+        break;
+      case "costoInsumo": setCostoInsumo(inputValue); 
+        break;
+      case "costoUnidad": setCostoUnidad(inputValue); 
+        break;
       default: throw Error("Input doesn't exist");
     }
-  }
-
-  const props = {
-    setShowModal, 
-    nombreProveedor,
-    telefono,
-    nombreInsumo, 
-    categoriaInsumo
   }
 
   return (
@@ -91,7 +94,34 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
               onChange={handleInputs} 
             />
           </Form.Group>
-          <InsumosAccordion {...props}/>
+          
+          <InsumosAccordion {...{
+            setShowModal, 
+            nombreProveedor,
+            telefono,
+            nombreInsumo, 
+            categoriaInsumo,
+            cantidades,
+            costoInsumo,
+            costoUnidad,
+            handleInputs
+          }}/>
+          <InsumosStock />
+          <div className="d-grid gap-2">
+            <Button variant="primary" onClick={() => {
+              insumosDB.push({
+                nombre: nombreInsumo,
+                categoria: categoriaInsumo,
+                costoUnitario: costoUnidad,
+                stock: "2000",
+                costoInsumo: costoInsumo,
+                stockMinimo: "100"
+              },)
+              setShowModal(false)}
+            }>
+              Agregar Insumo
+            </Button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>

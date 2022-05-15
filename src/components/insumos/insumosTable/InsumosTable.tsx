@@ -20,21 +20,23 @@ const InsumosTable = () => {
           </thead>
           <tbody>
             {
-              insumosDB.map((insumo: IInsumo) => (
-                <tr key={insumo.nombre}>
-                  <td>{insumo.nombre}</td>
-                  <td>{insumo.categoria}</td>
-                  <td>{insumo.costoUnitario}</td>
-                  <td>{insumo.stock}</td>
-                  <td>{insumo.costoInsumo}</td>
-                  <td>{insumo.stockMinimo}</td>
-                  <td>
-                    <Button>Eliminar</Button>
-                    <Button>Editar</Button>
-                    <Button>Llamar</Button>
-                  </td>
-                </tr>
-              ))
+              insumosDB.map((insumo: IInsumo) => {
+                const {nombre, categoria, costoUnitario, stock, costoInsumo, stockMinimo} = insumo;
+                return (
+                  <tr key={nombre}>
+                    <td>{nombre}</td>
+                    <td>{categoria}</td>
+                    <td>{costoUnitario}</td>
+                    <td>{stock}</td>
+                    <td>{costoInsumo}</td>
+                    <td>{stockMinimo}</td>
+                    <td>
+                      <Button>Eliminar</Button>
+                      <Button>Editar</Button>
+                      <Button>Llamar</Button>
+                    </td>
+                  </tr>)
+              })
             }
           </tbody>
         </Table>

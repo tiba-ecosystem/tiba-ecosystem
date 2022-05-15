@@ -1,28 +1,14 @@
-import { useState } from 'react';
-import { Accordion, Button, Col, Form, Row } from 'react-bootstrap';
-import { insumosDB } from '../../insumosDB';
-import { IModal } from './InsumosAccordion';
+import { Accordion, Col, Form, Row } from 'react-bootstrap';
 
-const InsumoRespectoCantidatesForm = ({...props}: IModal) => {
-  const [cantidades, setCantidades] = useState<string>("");
-  const [costoInsumo, setCostoInsumo] = useState<string>("");
-  const [costoUnidad, setCostoUnidad] = useState<string>("");
+export interface IInsumosRespectoCantidades {
+  cantidades: string,
+  costoInsumo: string,
+  costoUnidad: string,
+  handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
 
-  const {setShowModal, categoriaInsumo, nombreInsumo} = props;
-
-  const handleInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-
-    switch (event.target.name) {
-      case "cantidades": setCantidades(inputValue); 
-        break;
-      case "costoInsumo": setCostoInsumo(inputValue); 
-        break;
-      case "costoUnidad": setCostoUnidad(inputValue); 
-        break;
-      default: throw Error("Input doesn't exist");
-    }
-  }
+const InsumoRespectoCantidatesForm = ({...props}: IInsumosRespectoCantidades) => {
+  const {cantidades, costoInsumo, costoUnidad, handleInputs} = props;
 
   return (
     <Accordion.Item eventKey="0">
@@ -62,22 +48,6 @@ const InsumoRespectoCantidatesForm = ({...props}: IModal) => {
             onChange={handleInputs}
           />
         </Form.Group>
-      
-        <div className="d-grid gap-2">
-          <Button variant="primary" onClick={() => {
-            insumosDB.push({
-              nombre: nombreInsumo,
-              categoria: categoriaInsumo,
-              costoUnitario: costoUnidad,
-              stock: "2000",
-              costoInsumo: costoInsumo,
-              stockMinimo: "100"
-            },)
-            setShowModal(false)}
-          }>
-            Agregar Insumo
-          </Button>
-        </div>
       </Accordion.Body>
     </Accordion.Item>
   )
