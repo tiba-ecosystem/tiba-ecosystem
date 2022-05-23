@@ -21,12 +21,12 @@ const InsumosTable = () => {
           <tbody>
             {
               insumosDB.map((insumo: IInsumo) => {
-                const {nombre, categoria, costoUnitario, stock, costoInsumo, stockMinimo} = insumo;
+                const {nombre, categoria, /* costoUnitario, */ stock, costoPaquete: costoInsumo, stockMinimo} = insumo;
                 return (
                   <tr key={nombre}>
                     <td>{nombre}</td>
                     <td>{categoria}</td>
-                    <td>{costoUnitario}</td>
+                    <td>{/* {costoUnitario} */}</td>
                     <td>{stock}</td>
                     <td>{costoInsumo}</td>
                     <td>{stockMinimo}</td>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { insumosDB } from "../insumosDB";
+import InsumoCantidades from "./insumosAccordion/InsumoCantidades";
 import InsumosAccordion from "./insumosAccordion/InsumosAccordion";
 import InsumosStock from "./InsumosStock";
 
@@ -14,19 +15,21 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
   const [telefono, setTelefono] = useState<string>("");
   const [nombreInsumo, setNombreInsumo] = useState<string>("");
   const [categoriaInsumo, setCategoriaInsumo] = useState<string>("");
-  const [cantidades, setCantidades] = useState<string>("");
-  const [costoInsumo, setCostoInsumo] = useState<string>("");
-  const [costoUnidad, setCostoUnidad] = useState<string>("");
+  const [unidadesPorPaquete, setUnidadesPorPaquete] = useState<string>("");
+  const [costoPaquete, setCostoPaquete] = useState<string>("");
   const [stockInsumo, setStockInsumo] = useState<string>("");
   const [stockMinimoInsumo, setStockMinimoInsumo] = useState<string>("");
   const [largoInsumo, setLargoInsumo] = useState<string>("");
   const [altoInsumo, setAltoInsumo] = useState<string>("");
-  const [unidadMedidaLargo, setUnidadMedidaLargo] = useState<string>("");
-  const [unidadMedidaAlto, setUnidadMedidaAlto] = useState<string>("");
+  const [unidadDeMedida, setUnidadDeMedida] = useState<string>("milímetro");
+  const [pesoInsumo, setPesoInsumo] = useState<string>("");
+  const [unidadDePeso, setUnidadDePeso] = useState<string>("gramos");
+  const [unidadDeVolumen, setUnidadDeVolumen] = useState<string>("milímetro cúbico");
+  const [volumenInsumo, setVolumenInsumo] = useState<string>("");
 
   const handleInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
-
+    
     switch (event.target.name) {
       case "nombreProveedor": setNombreProveedor(inputValue); 
         break;
@@ -36,11 +39,11 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
         break;
       case "categoriaInsumo": setCategoriaInsumo(inputValue); 
         break;
-      case "cantidades": setCantidades(inputValue); 
+      case "unidadesPorPaquete": setUnidadesPorPaquete(inputValue); 
         break;
-      case "costoInsumo": setCostoInsumo(inputValue); 
+      case "costoPaquete": setCostoPaquete(inputValue); 
         break;
-      case "costoUnidad": setCostoUnidad(inputValue); 
+      case "pesoInsumo": setPesoInsumo(inputValue); 
         break;
       case "stockInsumo": setStockInsumo(inputValue); 
         break;
@@ -50,6 +53,8 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
         break;
       case "altoInsumo": setAltoInsumo(inputValue); 
         break;
+      case "volumenInsumo": setVolumenInsumo(inputValue); 
+        break;
       default: throw Error("Input doesn't exist");
     }
   }
@@ -58,9 +63,11 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
     const inputValue = event.target.value;
 
     switch (event.target.id) {
-      case "unidadMedidaLargo": setUnidadMedidaLargo(inputValue); 
+      case "unidadDeMedida": setUnidadDeMedida(inputValue); 
         break;
-      case "unidadMedidaAlto": setUnidadMedidaAlto(inputValue); 
+      case "unidadDePeso": setUnidadDePeso(inputValue); 
+        break;
+      case "unidadDeVolumen": setUnidadDeVolumen(inputValue); 
         break;
       default: throw Error("Input doesn't exist");
     }
@@ -79,7 +86,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
               <Form.Label>Nombre Proveedor</Form.Label>
               <Form.Control 
                 type="text" 
-                placeholder="Escriba el nombre del proveedor"
+                placeholder="ej. Pedro Pérez"
                 name="nombreProveedor"
                 defaultValue={nombreProveedor} 
                 onChange={handleInputs} 
@@ -90,7 +97,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
               <Form.Label>Telefono</Form.Label>
               <Form.Control 
                 type="text" 
-                placeholder="Escriba el telefono del proveedor" 
+                placeholder="ej. 3120987654" 
                 name="telefono"
                 defaultValue={telefono} 
                 onChange={handleInputs} 
@@ -102,7 +109,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
             <Form.Label>Nombre del insumo</Form.Label>
             <Form.Control 
               type="text" 
-              placeholder="Escriba el nombre del insumo" 
+              placeholder="ej. Atún Marimar" 
               name="nombreInsumo"
               defaultValue={nombreInsumo} 
               onChange={handleInputs} 
@@ -113,7 +120,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
             <Form.Label>Categoría del insumo</Form.Label>
             <Form.Control 
               type="text" 
-              placeholder="Escriba la categoría" 
+              placeholder="ej. no perecederos" 
               name="categoriaInsumo"
               defaultValue={categoriaInsumo} 
               onChange={handleInputs} 
@@ -126,15 +133,15 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
             telefono,
             nombreInsumo, 
             categoriaInsumo,
-            cantidades,
-            costoInsumo,
-            costoUnidad,
             largoInsumo,
             altoInsumo,
+            pesoInsumo,
+            unidadDeMedida,
+            volumenInsumo,
             handleInputs,
             handleDropdowns
           }} />
-
+          <InsumoCantidades {...{unidadesPorPaquete, costoPaquete, handleInputs}} />
           <InsumosStock {...{
             stockInsumo,
             stockMinimoInsumo,
@@ -146,22 +153,19 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
               insumosDB.push({
                 nombre: nombreInsumo,
                 categoria: categoriaInsumo,
-                costoUnitario: costoUnidad,
                 stock: stockInsumo,
-                costoInsumo: costoInsumo,
+                costoPaquete: costoPaquete,
                 stockMinimo: stockMinimoInsumo
               })
               setNombreProveedor("");
               setTelefono("");
               setNombreInsumo("");
               setCategoriaInsumo("");
-              setCantidades("");
-              setCostoInsumo("");
-              setCostoUnidad("");
+              setUnidadesPorPaquete("");
+              setCostoPaquete("");
               setStockInsumo("");
               setStockMinimoInsumo("");
-              setUnidadMedidaAlto("");
-              setUnidadMedidaLargo("");
+              setUnidadDeMedida("");
               setShowModal(false)}
             }>
               Agregar Insumo
