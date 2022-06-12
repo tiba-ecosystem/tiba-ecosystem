@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { insumosDB } from "../insumosDB";
-import InsumoCantidades from "./insumosAccordion/InsumoCantidades";
-import InsumosAccordion from "./insumosAccordion/InsumosAccordion";
+import InsumoCantidades from "./insumosMedidas/InsumoCantidades";
+import InsumoRespectoLongitud from "./insumosMedidas/InsumoRespectoLongitud";
+import InsumoRespectoPesoForm from "./insumosMedidas/InsumoRespectoPeso";
+import InsumoRespectoVolumen from "./insumosMedidas/InsumoRespectoVolumen";
 import InsumosStock from "./InsumosStock";
 
 interface IModal {
@@ -130,21 +132,45 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
             />
           </Form.Group>
 
-          <InsumosAccordion {...{
-            setShowModal, 
-            nombreProveedor,
-            telefono,
-            nombreInsumo, 
-            categoriaInsumo,
-            largoInsumo,
-            altoInsumo,
-            pesoInsumo,
-            unidadDeMedida,
-            volumenInsumo,
-            handleInputs,
-            handleDropdowns,
-            insumoRespecto
-          }} />
+          <>
+            <Form.Group as={Col} controlId="formGridPassword">
+              <Form.Label>Agregar insumo respecto a</Form.Label>
+              <Form.Select 
+                aria-label="insumo respecto a"
+                id="insumoRespecto" 
+                onChange={handleDropdowns}
+              >
+                <option value="peso">peso</option>
+                <option value="longitud">longitud</option>
+                <option value="volumen">volumen</option>
+              </Form.Select>
+            </Form.Group>
+            <br />
+            {
+              insumoRespecto === "peso" ? (
+                <InsumoRespectoPesoForm {...{
+                  pesoInsumo,
+                  handleInputs,
+                  handleDropdowns
+                }}/>  
+              ) : insumoRespecto === "longitud" ? (
+                <InsumoRespectoLongitud {...{
+                  unidadDeMedida,
+                  altoInsumo,
+                  largoInsumo,
+                  handleInputs,
+                  handleDropdowns
+                }} />
+              ) : insumoRespecto === "volumen" ? (
+                <InsumoRespectoVolumen {...{
+                  volumenInsumo,
+                  handleInputs,
+                  handleDropdowns
+                }}/>
+              ) : null
+            }
+          </>
+          
           <InsumoCantidades {...{unidadesPorPaquete, costoPaquete, handleInputs}} />
           <InsumosStock {...{
             stockInsumo,
