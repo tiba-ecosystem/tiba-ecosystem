@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { Accordion, Col, Form, Row } from "react-bootstrap"
+import { Col, Form, Row } from "react-bootstrap"
 
 export interface IInsumosRespectoLongitudes {
   largoInsumo: string,
@@ -24,68 +24,65 @@ const InsumoRespectoLongitud = ({...props}: IInsumosRespectoLongitudes) => {
   }
 
   return (
-    <Accordion.Item eventKey="2">
-      <Accordion.Header>Agregar insumo con respecto a su longitud</Accordion.Header>
-      <Accordion.Body>
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Label>Unidad de medida</Form.Label>
-            <Form.Select 
-              aria-label="Unidad de medida" 
-              id="unidadDeMedida" 
-              onChange={handleDropdowns}
-            >
-              <option value="milímetro">milímetros</option>
-              <option value="centímetro">centímetros</option>
-              <option value="metro">metros</option>
-              <option value="pulgada">pulgadas</option>
-            </Form.Select>
-          </Form.Group>
-        </Row>
-        
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Largo del insumo</Form.Label>
-            <Form.Control 
-              type="text" 
-              name="largoInsumo"
-              value={largoInsumo} 
-              onChange={handleNumericInputs} 
-            />
-          </Form.Group>
+    <>
+      <Row className="mb-3">
+        <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Label>Unidad de medida</Form.Label>
+          <Form.Select 
+            aria-label="Unidad de medida" 
+            id="unidadDeMedida" 
+            onChange={handleDropdowns}
+          >
+            <option value="milímetro">milímetros</option>
+            <option value="centímetro">centímetros</option>
+            <option value="metro">metros</option>
+            <option value="pulgada">pulgadas</option>
+          </Form.Select>
+        </Form.Group>
+      </Row>
+      
+      <Row className="mb-3">
+        <Form.Group as={Col} controlId="formGridEmail">
+          <Form.Label>Largo del insumo</Form.Label>
+          <Form.Control 
+            type="text" 
+            name="largoInsumo"
+            value={largoInsumo} 
+            onChange={handleNumericInputs} 
+          />
+        </Form.Group>
 
-          <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Label><br /></Form.Label>
-            <Form.Control 
-              type="text" 
-              value={largoInsumo && `${largoInsumo} ${unidadDeMedida}${Number(largoInsumo) > 1 ? "s" : ""}`}
-              disabled 
-            />
-          </Form.Group>
-        </Row>
+        <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Label><br /></Form.Label>
+          <Form.Control 
+            type="text" 
+            value={largoInsumo && `${largoInsumo} ${unidadDeMedida}${Number(largoInsumo) > 1 ? "s" : ""}`}
+            disabled 
+          />
+        </Form.Group>
+      </Row>
 
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>Alto del insumo</Form.Label>
-            <Form.Control
-              type="text" 
-              name="altoInsumo"
-              value={altoInsumo} 
-              onChange={handleNumericInputs} 
-            />
-          </Form.Group>
+      <Row className="mb-3">
+        <Form.Group as={Col} controlId="formGridEmail">
+          <Form.Label>Alto del insumo</Form.Label>
+          <Form.Control
+            type="text" 
+            name="altoInsumo"
+            value={altoInsumo} 
+            onChange={handleNumericInputs} 
+          />
+        </Form.Group>
 
-          <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Label><br /></Form.Label>
-            <Form.Control 
-              type="text" 
-              value={altoInsumo && `${altoInsumo} ${unidadDeMedida}${Number(altoInsumo) > 1 ? "s" : ""}`}
-              disabled 
-            />
-          </Form.Group>
-        </Row>
-      </Accordion.Body>
-    </Accordion.Item>
+        <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Label><br /></Form.Label>
+          <Form.Control 
+            type="text" 
+            value={altoInsumo && `${altoInsumo} ${unidadDeMedida}${Number(altoInsumo) > 1 ? "s" : ""}`}
+            disabled 
+          />
+        </Form.Group>
+      </Row>
+    </>
   )
 }
 

@@ -26,6 +26,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
   const [unidadDePeso, setUnidadDePeso] = useState<string>("gramos");
   const [unidadDeVolumen, setUnidadDeVolumen] = useState<string>("milímetro cúbico");
   const [volumenInsumo, setVolumenInsumo] = useState<string>("");
+  const [insumoRespecto, setInsumoRespecto] = useState<string>("peso");
 
   const handleInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -68,6 +69,8 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
       case "unidadDePeso": setUnidadDePeso(inputValue); 
         break;
       case "unidadDeVolumen": setUnidadDeVolumen(inputValue); 
+        break;
+      case "insumoRespecto": setInsumoRespecto(inputValue); 
         break;
       default: throw Error("Input doesn't exist");
     }
@@ -139,7 +142,8 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
             unidadDeMedida,
             volumenInsumo,
             handleInputs,
-            handleDropdowns
+            handleDropdowns,
+            insumoRespecto
           }} />
           <InsumoCantidades {...{unidadesPorPaquete, costoPaquete, handleInputs}} />
           <InsumosStock {...{

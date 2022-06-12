@@ -1,5 +1,5 @@
 import React from "react";
-import { Accordion } from "react-bootstrap"
+import { Col, Form } from "react-bootstrap"
 import InsumoRespectoLongitud from "./InsumoRespectoLongitud";
 import InsumoRespectoPesoForm from "./InsumoRespectoPeso";
 import InsumoRespectoVolumen from "./InsumoRespectoVolumen";
@@ -15,6 +15,7 @@ export interface IInsumosAccordion {
   unidadDeMedida: string,
   largoInsumo: string,
   altoInsumo: string,
+  insumoRespecto: string,
   handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void,
   handleDropdowns: (event: React.ChangeEvent<HTMLSelectElement>) => void, 
 }
@@ -26,30 +27,50 @@ const InsumosAccordion = ({...props}: IInsumosAccordion) => {
     pesoInsumo,
     volumenInsumo,
     unidadDeMedida,
+    insumoRespecto,
     handleInputs,
     handleDropdowns
   } = props;
 
   return (
-    <Accordion defaultActiveKey="0">
-      <InsumoRespectoPesoForm {...{
-        pesoInsumo,
-        handleInputs,
-        handleDropdowns
-      }}/>
-      <InsumoRespectoLongitud {...{
-        unidadDeMedida,
-        altoInsumo,
-        largoInsumo,
-        handleInputs,
-        handleDropdowns
-      }} />
-      <InsumoRespectoVolumen {...{
-        volumenInsumo,
-        handleInputs,
-        handleDropdowns
-      }}/>
-    </Accordion>
+    <>
+      <Form.Group as={Col} controlId="formGridPassword">
+        <Form.Label>Agregar insumo respecto a</Form.Label>
+        <Form.Select 
+          aria-label="insumo respecto a"
+          id="insumoRespecto" 
+          onChange={handleDropdowns}
+        >
+          <option value="peso">peso</option>
+          <option value="longitud">longitud</option>
+          <option value="volumen">volumen</option>
+        </Form.Select>
+      </Form.Group>
+      <br />
+      {
+        insumoRespecto === "peso" ? (
+          <InsumoRespectoPesoForm {...{
+            pesoInsumo,
+            handleInputs,
+            handleDropdowns
+          }}/>  
+        ) : insumoRespecto === "longitud" ? (
+          <InsumoRespectoLongitud {...{
+            unidadDeMedida,
+            altoInsumo,
+            largoInsumo,
+            handleInputs,
+            handleDropdowns
+          }} />
+        ) : insumoRespecto === "volumen" ? (
+          <InsumoRespectoVolumen {...{
+            volumenInsumo,
+            handleInputs,
+            handleDropdowns
+          }}/>
+        ) : null
+      }
+    </>
   )
 }
 
