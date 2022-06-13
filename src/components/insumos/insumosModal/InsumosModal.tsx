@@ -23,7 +23,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
   const [stockMinimoInsumo, setStockMinimoInsumo] = useState<string>("");
   const [largoInsumo, setLargoInsumo] = useState<string>("");
   const [altoInsumo, setAltoInsumo] = useState<string>("");
-  const [unidadDeMedida, setUnidadDeMedida] = useState<string>("milímetro");
+  const [unidadDeLongitud, setUnidadDeLongitud] = useState<string>("milímetro");
   const [pesoInsumo, setPesoInsumo] = useState<string>("");
   const [unidadDePeso, setUnidadDePeso] = useState<string>("gramo");
   const [unidadDeVolumen, setUnidadDeVolumen] = useState<string>("milímetro cúbico");
@@ -66,7 +66,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
     const inputValue = event.target.value;
 
     switch (event.target.id) {
-      case "unidadDeMedida": setUnidadDeMedida(inputValue); 
+      case "unidadDeLongitud": setUnidadDeLongitud(inputValue); 
         break;
       case "unidadDePeso": setUnidadDePeso(inputValue); 
         break;
@@ -132,48 +132,53 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
             />
           </Form.Group>
 
-          <>
-            <Form.Group as={Col} controlId="formGridPassword">
-              <Form.Label>Agregar insumo respecto a</Form.Label>
-              <Form.Select 
-                aria-label="insumo respecto a"
-                id="insumoRespecto" 
-                onChange={handleDropdowns}
-              >
-                <option value="peso">peso</option>
-                <option value="longitud">longitud</option>
-                <option value="volumen">volumen</option>
-              </Form.Select>
-            </Form.Group>
-            <br />
-            {
-              insumoRespecto === "peso" ? (
-                <InsumoRespectoPesoForm {...{
-                  unidadDePeso,
-                  pesoInsumo,
-                  handleInputs,
-                  handleDropdowns
-                }}/>  
-              ) : insumoRespecto === "longitud" ? (
-                <InsumoRespectoLongitud {...{
-                  unidadDeMedida,
-                  altoInsumo,
-                  largoInsumo,
-                  handleInputs,
-                  handleDropdowns
-                }} />
-              ) : insumoRespecto === "volumen" ? (
-                <InsumoRespectoVolumen {...{
-                  unidadDeVolumen,
-                  volumenInsumo,
-                  handleInputs,
-                  handleDropdowns
-                }}/>
-              ) : null
-            }
-          </>
+          <hr style={{marginTop: "30px"}}/>
+
+          <Form.Group as={Col} controlId="formGridPassword">
+            <Form.Label>Agregar insumo respecto a</Form.Label>
+            <Form.Select 
+              aria-label="insumo respecto a"
+              id="insumoRespecto" 
+              onChange={handleDropdowns}
+            >
+              <option value="peso">peso</option>
+              <option value="longitud">longitud</option>
+              <option value="volumen">volumen</option>
+            </Form.Select>
+          </Form.Group>
+          <br />
+          {
+            insumoRespecto === "peso" ? (
+              <InsumoRespectoPesoForm {...{
+                unidadDePeso,
+                pesoInsumo,
+                handleInputs,
+                handleDropdowns
+              }}/>  
+            ) : insumoRespecto === "longitud" ? (
+              <InsumoRespectoLongitud {...{
+                unidadDeLongitud,
+                altoInsumo,
+                largoInsumo,
+                handleInputs,
+                handleDropdowns
+              }} />
+            ) : insumoRespecto === "volumen" ? (
+              <InsumoRespectoVolumen {...{
+                unidadDeVolumen,
+                volumenInsumo,
+                handleInputs,
+                handleDropdowns
+              }}/>
+            ) : null
+          }
+          
+          <hr style={{marginTop: "30px"}} />
           
           <InsumoCantidades {...{unidadesPorPaquete, costoPaquete, handleInputs}} />
+
+          <hr style={{marginTop: "30px"}} />
+
           <InsumosStock {...{
             stockInsumo,
             stockMinimoInsumo,
@@ -197,7 +202,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
               setCostoPaquete("");
               setStockInsumo("");
               setStockMinimoInsumo("");
-              setUnidadDeMedida("");
+              setUnidadDeLongitud("");
               setShowModal(false)}
             }>
               Agregar Insumo

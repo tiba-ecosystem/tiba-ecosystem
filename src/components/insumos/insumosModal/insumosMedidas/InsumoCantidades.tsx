@@ -28,7 +28,7 @@ const InsumoCantidades = ({...props}: IInsumosRespectoCantidades) => {
     <div className="mt-3">
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>Unidades por paquete</Form.Label>
+          <Form.Label>Unidades por paquete (u/p)</Form.Label>
           <Form.Control 
             type="text" 
             name="unidadesPorPaquete"
@@ -36,16 +36,21 @@ const InsumoCantidades = ({...props}: IInsumosRespectoCantidades) => {
             onChange={handleNumericInputs}
             // pattern="^[0-9]+$" 
           />
-          {
-            unidadesPorPaquete && (
-              <span style={{fontSize: "0.9rem", marginLeft: "0.8rem"}}>
-                {formatterNumber.format(Number(unidadesPorPaquete))}
-              </span>
-            )
-          }
+          {/* {
+            unidadesPorPaquete && ( */}
+            {/* )
+          } */}
+        </Form.Group>
+        <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Label><br /></Form.Label>
+          <Form.Control 
+            type="text" 
+            value={`${formatterNumber.format(Number(unidadesPorPaquete))} u/p`}
+            disabled 
+          />
         </Form.Group>
 
-        <Form.Group as={Col} controlId="formGridPassword">
+        {/* <Form.Group as={Col} controlId="formGridPassword">
           <Form.Label>Costo por paquete</Form.Label>
           <Form.Control 
             type="text" 
@@ -54,12 +59,41 @@ const InsumoCantidades = ({...props}: IInsumosRespectoCantidades) => {
             onChange={handleNumericInputs}  
           />
           {
-            costoPaquete && (
-              <span style={{fontSize: "0.9rem"}}>
-                {formatter.format(Number(costoPaquete))}
-              </span>
+            unidadesPorPaquete && (
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label><br /></Form.Label>
+                <Form.Control 
+                  type="text" 
+                  value={formatter.format(Number(costoPaquete))}
+                  disabled 
+                />
+              </Form.Group>
             )
           }
+        </Form.Group> */}
+      </Row>
+
+      <Row className="mb-3">
+        <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Label>Costo por paquete (pesos)</Form.Label>
+          <Form.Control 
+            type="text" 
+            name="costoPaquete"
+            value={costoPaquete} 
+            onChange={handleNumericInputs}  
+          />
+          {/* {
+            unidadesPorPaquete && ( */}
+            {/* )
+          } */}
+        </Form.Group>
+        <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Label><br /></Form.Label>
+          <Form.Control 
+            type="text" 
+            value={formatter.format(Number(costoPaquete))}
+            disabled 
+          />
         </Form.Group>
       </Row>
       {

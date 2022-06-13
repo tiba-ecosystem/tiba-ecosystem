@@ -4,7 +4,7 @@ import { Col, Form, Row } from "react-bootstrap"
 export interface IInsumosRespectoLongitudes {
   largoInsumo: string,
   altoInsumo: string,
-  unidadDeMedida: string,
+  unidadDeLongitud: string,
   handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void,
   handleDropdowns: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
@@ -13,7 +13,7 @@ const InsumoRespectoLongitud = ({...props}: IInsumosRespectoLongitudes) => {
   const {
     largoInsumo, 
     altoInsumo, 
-    unidadDeMedida,
+    unidadDeLongitud,
     handleInputs,
     handleDropdowns
   } = props;
@@ -27,10 +27,10 @@ const InsumoRespectoLongitud = ({...props}: IInsumosRespectoLongitudes) => {
     <>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridPassword">
-          <Form.Label>Unidad de medida</Form.Label>
+          <Form.Label>Unidad de longitud</Form.Label>
           <Form.Select 
-            aria-label="Unidad de medida" 
-            id="unidadDeMedida" 
+            aria-label="Unidad de longitud" 
+            id="unidadDeLongitud" 
             onChange={handleDropdowns}
           >
             <option value="milímetro">milímetros</option>
@@ -56,7 +56,7 @@ const InsumoRespectoLongitud = ({...props}: IInsumosRespectoLongitudes) => {
           <Form.Label><br /></Form.Label>
           <Form.Control 
             type="text" 
-            value={largoInsumo && `${largoInsumo} ${unidadDeMedida}${Number(largoInsumo) > 1 ? "s" : ""}`}
+            value={largoInsumo && `${largoInsumo} ${unidadDeLongitud}${Number(largoInsumo) > 1 ? "s" : ""}`}
             disabled 
           />
         </Form.Group>
@@ -77,7 +77,7 @@ const InsumoRespectoLongitud = ({...props}: IInsumosRespectoLongitudes) => {
           <Form.Label><br /></Form.Label>
           <Form.Control 
             type="text" 
-            value={altoInsumo && `${altoInsumo} ${unidadDeMedida}${Number(altoInsumo) > 1 ? "s" : ""}`}
+            value={altoInsumo && `${altoInsumo} ${unidadDeLongitud}${Number(altoInsumo) > 1 ? "s" : ""}`}
             disabled 
           />
         </Form.Group>
