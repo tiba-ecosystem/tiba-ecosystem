@@ -40,12 +40,12 @@ const InsumosTable = () => {
             }
           </tbody>
         </Table>
-        <Button>Todos</Button>
+        {/* <Button>Todos</Button>
         <Button>1</Button>
         <Button>2</Button>
         <Button>3</Button>
         <Button>4</Button>
-        <Button>Siguiente</Button>
+        <Button>Siguiente</Button> */}
     </div>
   )
 }

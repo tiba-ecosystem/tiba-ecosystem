@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react';
 import { Col, Form, Row } from 'react-bootstrap'
 
 export interface IInsumosRespectoPeso {
+  unidadDePeso: string,
   pesoInsumo: string,
   handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void,
   handleDropdowns: (event: React.ChangeEvent<HTMLSelectElement>) => void
@@ -9,6 +10,7 @@ export interface IInsumosRespectoPeso {
 
 const InsumoRespectoPesoForm = ({...props}: IInsumosRespectoPeso) => {
   const {
+    unidadDePeso,
     pesoInsumo,
     handleInputs,
     handleDropdowns
@@ -22,6 +24,22 @@ const InsumoRespectoPesoForm = ({...props}: IInsumosRespectoPeso) => {
   return (
     <>
       <Row className="mb-3">
+        <Form.Group as={Col} controlId="formGridPassword">
+          <Form.Label>Unidad de peso</Form.Label>
+          <Form.Select 
+            aria-label="Unidad de peso"
+            id="unidadDePeso" 
+            onChange={handleDropdowns}
+          >
+            <option value="gramo">gramos</option>
+            <option value="kilogramo">kilogramos</option>
+            <option value="libra">libras</option>
+            <option value="onza">onzas</option>
+          </Form.Select>
+        </Form.Group>
+      </Row>
+
+      <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridEmail">
           <Form.Label>Peso del insumo</Form.Label>
           <Form.Control 
@@ -33,17 +51,12 @@ const InsumoRespectoPesoForm = ({...props}: IInsumosRespectoPeso) => {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridPassword">
-          <Form.Label>Unidad de peso</Form.Label>
-          <Form.Select 
-            aria-label="Unidad de peso"
-            id="unidadDePeso" 
-            onChange={handleDropdowns}
-          >
-            <option value="gramos">gramos</option>
-            <option value="kilogramos">kilogramos</option>
-            <option value="libras">libras</option>
-            <option value="onzas">onzas</option>
-          </Form.Select>
+          <Form.Label><br /></Form.Label>
+          <Form.Control 
+            type="text" 
+            value={pesoInsumo && `${pesoInsumo} ${unidadDePeso}${Number(pesoInsumo) > 1 ? "s" : ""}`}
+            disabled 
+          />
         </Form.Group>
       </Row>
     </>

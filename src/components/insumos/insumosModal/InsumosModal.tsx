@@ -25,7 +25,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
   const [altoInsumo, setAltoInsumo] = useState<string>("");
   const [unidadDeMedida, setUnidadDeMedida] = useState<string>("milímetro");
   const [pesoInsumo, setPesoInsumo] = useState<string>("");
-  const [unidadDePeso, setUnidadDePeso] = useState<string>("gramos");
+  const [unidadDePeso, setUnidadDePeso] = useState<string>("gramo");
   const [unidadDeVolumen, setUnidadDeVolumen] = useState<string>("milímetro cúbico");
   const [volumenInsumo, setVolumenInsumo] = useState<string>("");
   const [insumoRespecto, setInsumoRespecto] = useState<string>("peso");
@@ -149,6 +149,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
             {
               insumoRespecto === "peso" ? (
                 <InsumoRespectoPesoForm {...{
+                  unidadDePeso,
                   pesoInsumo,
                   handleInputs,
                   handleDropdowns
@@ -163,6 +164,7 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
                 }} />
               ) : insumoRespecto === "volumen" ? (
                 <InsumoRespectoVolumen {...{
+                  unidadDeVolumen,
                   volumenInsumo,
                   handleInputs,
                   handleDropdowns
