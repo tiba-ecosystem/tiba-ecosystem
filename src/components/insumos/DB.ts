@@ -1,5 +1,5 @@
 export interface IInsumo {
-  nombre: string,
+  nombreInsumo: string,
   categoria: string,
   // costoUnitario: string,
   stock: string,
@@ -7,9 +7,14 @@ export interface IInsumo {
   stockMinimo: string
 }
 
+export interface IProveedor {
+  nombreProveedor: string,
+  telefono: string,
+}
+
 export const insumosDB: IInsumo[] = [
   {
-    nombre: "Atun marimar",
+    nombreInsumo: "Atun marimar",
     categoria: "no perecederos",
     // costoUnitario: "950",
     stock: "2000",
@@ -17,11 +22,22 @@ export const insumosDB: IInsumo[] = [
     stockMinimo: "100"
   },
   {
-    nombre: "Atun el salado",
+    nombreInsumo: "Atun el salado",
     categoria: "no perecederos",
     // costoUnitario: "1000",
     stock: "3000",
     costoPaquete: "2500",
     stockMinimo: "50"
+  }
+];
+
+export const proveedoresDB: IProveedor[] = [
+  {
+    nombreProveedor: "Atunes exquisitos",
+    telefono: "3214567743"   
+  },
+  {
+    nombreProveedor: "Manjares deliciosos",
+    telefono: "1234567890"
   }
 ];

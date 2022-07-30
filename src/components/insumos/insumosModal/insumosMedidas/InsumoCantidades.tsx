@@ -103,7 +103,7 @@ const InsumoCantidades = ({...props}: IInsumosRespectoCantidades) => {
             <Form.Control 
               type="text" 
               name="costoUnidad"
-              value={`$${costoPorUnidad.toFixed(2)}`} 
+              value={formatterNumber.format(Number(costoPorUnidad.toFixed(2)))} 
               disabled
             />
           </Form.Group>

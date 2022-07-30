@@ -1,4 +1,5 @@
 import Insumos from './components/insumos/Insumos';
+import './styles.css';
 
 function App() {
   return (

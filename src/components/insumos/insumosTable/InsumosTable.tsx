@@ -1,5 +1,5 @@
 import { Button, Table } from 'react-bootstrap'
-import { IInsumo, insumosDB } from '../insumosDB'
+import { IInsumo, insumosDB } from '../DB'
 
 const InsumosTable = () => {
   return (
@@ -21,10 +21,10 @@ const InsumosTable = () => {
           <tbody>
             {
               insumosDB.map((insumo: IInsumo) => {
-                const {nombre, categoria, /* costoUnitario, */ stock, costoPaquete: costoInsumo, stockMinimo} = insumo;
+                const {nombreInsumo, categoria, /* costoUnitario, */ stock, costoPaquete: costoInsumo, stockMinimo} = insumo;
                 return (
-                  <tr key={nombre}>
-                    <td>{nombre}</td>
+                  <tr key={nombreInsumo}>
+                    <td>{nombreInsumo}</td>
                     <td>{categoria}</td>
                     <td>{/* {costoUnitario} */}</td>
                     <td>{stock}</td>
