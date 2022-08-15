@@ -1,11 +1,14 @@
 import Insumos from './components/insumos/Insumos';
+import ContextStateWrapper from './ContextStateWrapper';
 import './styles.css';
 
 function App() {
   return (
-    <div className='mx-5 my-5'>
-      <Insumos />
-    </div>
+    <ContextStateWrapper>
+      <div className='mx-5 my-5'>
+        <Insumos />
+      </div>
+    </ContextStateWrapper>
   );
 }
 

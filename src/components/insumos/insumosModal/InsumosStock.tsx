@@ -1,14 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form } from 'react-bootstrap';
+import { contextStateProps } from '../../../ContextStateWrapper';
 
-interface IInsumosStock {
-  stockInsumo: string;
-  stockMinimoInsumo: string;
-  handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-const InsumosStock = ({ ...props }: IInsumosStock) => {
-  const { stockInsumo, stockMinimoInsumo, handleInputs } = props;
+const InsumosStock = () => {
+  const { stockInsumo, stockMinimoInsumo, handleInputs } = useContext(contextStateProps);
   return (
     <div className='mt-3'>
       <Form.Group className='mb-3' controlId='formGridAddress2'>

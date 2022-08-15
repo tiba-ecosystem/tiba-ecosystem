@@ -1,5 +1,6 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
+import { contextStateProps } from '../../../../ContextStateWrapper';
 
 export interface IInsumosRespectoLongitudes {
   largoInsumo: string;
@@ -9,8 +10,9 @@ export interface IInsumosRespectoLongitudes {
   handleDropdowns: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const InsumoRespectoLongitud = ({ ...props }: IInsumosRespectoLongitudes) => {
-  const { largoInsumo, altoInsumo, unidadDeLongitud, handleInputs, handleDropdowns } = props;
+const InsumoRespectoLongitud = () => {
+  const { largoInsumo, altoInsumo, unidadDeLongitud, handleInputs, handleDropdowns } =
+    useContext(contextStateProps);
 
   const handleNumericInputs = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;

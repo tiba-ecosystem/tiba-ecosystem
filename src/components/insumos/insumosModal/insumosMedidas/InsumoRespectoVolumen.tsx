@@ -1,5 +1,6 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useContext } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
+import { contextStateProps } from '../../../../ContextStateWrapper';
 
 export interface IInsumosRespectoVolumen {
   unidadDeVolumen: string;
@@ -8,8 +9,9 @@ export interface IInsumosRespectoVolumen {
   handleDropdowns: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const InsumoRespectoVolumen = ({ ...props }: IInsumosRespectoVolumen) => {
-  const { unidadDeVolumen, volumenInsumo, handleInputs, handleDropdowns } = props;
+const InsumoRespectoVolumen = () => {
+  const { unidadDeVolumen, volumenInsumo, handleInputs, handleDropdowns } =
+    useContext(contextStateProps);
 
   const handleNumericInputs = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;

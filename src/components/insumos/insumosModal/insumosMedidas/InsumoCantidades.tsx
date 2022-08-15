@@ -1,6 +1,7 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
 
 import { Col, Form, Row } from 'react-bootstrap';
+import { contextStateProps } from '../../../../ContextStateWrapper';
 
 export interface IInsumosRespectoCantidades {
   unidadesPorPaquete: string;
@@ -8,8 +9,9 @@ export interface IInsumosRespectoCantidades {
   handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function InsumoCantidades({ ...props }: IInsumosRespectoCantidades) {
-  const { unidadesPorPaquete, costoPaquete, /* costoUnidad, */ handleInputs } = props;
+function InsumoCantidades() {
+  const { unidadesPorPaquete, costoPaquete, /* costoUnidad, */ handleInputs } =
+    useContext(contextStateProps);
 
   const costoPorUnidad = Number(costoPaquete) / Number(unidadesPorPaquete);
 

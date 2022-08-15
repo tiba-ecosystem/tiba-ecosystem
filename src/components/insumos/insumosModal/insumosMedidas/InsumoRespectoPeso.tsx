@@ -1,5 +1,6 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
+import { contextStateProps } from '../../../../ContextStateWrapper';
 
 export interface IInsumosRespectoPeso {
   unidadDePeso: string;
@@ -8,8 +9,8 @@ export interface IInsumosRespectoPeso {
   handleDropdowns: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const InsumoRespectoPesoForm = ({ ...props }: IInsumosRespectoPeso) => {
-  const { unidadDePeso, pesoInsumo, handleInputs, handleDropdowns } = props;
+const InsumoRespectoPesoForm = () => {
+  const { unidadDePeso, pesoInsumo, handleInputs, handleDropdowns } = useContext(contextStateProps);
 
   const handleNumericInputs = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;

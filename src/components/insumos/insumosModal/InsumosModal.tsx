@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import DatalistInput from 'react-datalist-input';
+import { contextStateProps } from '../../../ContextStateWrapper';
 import { insumosDB, proveedoresDB } from '../DB';
 import InsumoCantidades from './insumosMedidas/InsumoCantidades';
 import InsumoRespectoLongitud from './insumosMedidas/InsumoRespectoLongitud';
@@ -8,131 +9,39 @@ import InsumoRespectoPesoForm from './insumosMedidas/InsumoRespectoPeso';
 import InsumoRespectoVolumen from './insumosMedidas/InsumoRespectoVolumen';
 import InsumosStock from './InsumosStock';
 
-interface IModal {
-  showModal: boolean;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const InsumosModal = ({ showModal, setShowModal }: IModal) => {
-  const [nombreProveedor, setNombreProveedor] = useState<string>('');
-  const [telefono, setTelefono] = useState<string>('');
-  const [nombreInsumo, setNombreInsumo] = useState<string>('');
-  const [categoriaInsumo, setCategoriaInsumo] = useState<string>('');
-  const [unidadesPorPaquete, setUnidadesPorPaquete] = useState<string>('');
-  const [costoPaquete, setCostoPaquete] = useState<string>('');
-  const [stockInsumo, setStockInsumo] = useState<string>('');
-  const [stockMinimoInsumo, setStockMinimoInsumo] = useState<string>('');
-  const [largoInsumo, setLargoInsumo] = useState<string>('');
-  const [altoInsumo, setAltoInsumo] = useState<string>('');
-  const [unidadDeLongitud, setUnidadDeLongitud] = useState<string>('milímetro');
-  const [pesoInsumo, setPesoInsumo] = useState<string>('');
-  const [unidadDePeso, setUnidadDePeso] = useState<string>('gramo');
-  const [unidadDeVolumen, setUnidadDeVolumen] = useState<string>('milímetro cúbico');
-  const [volumenInsumo, setVolumenInsumo] = useState<string>('');
-  const [insumoRespecto, setInsumoRespecto] = useState<string>('peso');
-
-  const handleInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-
-    switch (event.target.name) {
-      case 'nombreProveedor':
-        setNombreProveedor(inputValue);
-        break;
-      case 'telefono':
-        setTelefono(inputValue);
-        break;
-      case 'nombreInsumo':
-        setNombreInsumo(inputValue);
-        break;
-      case 'categoriaInsumo':
-        setCategoriaInsumo(inputValue);
-        break;
-      case 'unidadesPorPaquete':
-        setUnidadesPorPaquete(inputValue);
-        break;
-      case 'costoPaquete':
-        setCostoPaquete(inputValue);
-        break;
-      case 'pesoInsumo':
-        setPesoInsumo(inputValue);
-        break;
-      case 'stockInsumo':
-        setStockInsumo(inputValue);
-        break;
-      case 'stockMinimoInsumo':
-        setStockMinimoInsumo(inputValue);
-        break;
-      case 'largoInsumo':
-        setLargoInsumo(inputValue);
-        break;
-      case 'altoInsumo':
-        setAltoInsumo(inputValue);
-        break;
-      case 'volumenInsumo':
-        setVolumenInsumo(inputValue);
-        break;
-      default:
-        throw Error('Input does not exist');
-    }
-  };
-
-  const handleDropdowns = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const inputValue = event.target.value;
-
-    switch (event.target.id) {
-      case 'unidadDeLongitud':
-        setUnidadDeLongitud(inputValue);
-        break;
-      case 'unidadDePeso':
-        setUnidadDePeso(inputValue);
-        break;
-      case 'unidadDeVolumen':
-        setUnidadDeVolumen(inputValue);
-        break;
-      case 'insumoRespecto':
-        setInsumoRespecto(inputValue);
-        break;
-      default:
-        throw Error('Input does not exist');
-    }
-  };
+const InsumosModal = () => {
+  const {
+    showModal,
+    setShowModal,
+    nombreProveedor,
+    setNombreProveedor,
+    telefono,
+    setTelefono,
+    nombreInsumo,
+    setNombreInsumo,
+    categoriaInsumo,
+    setCategoriaInsumo,
+    setUnidadesPorPaquete,
+    costoPaquete,
+    setCostoPaquete,
+    stockInsumo,
+    setStockInsumo,
+    stockMinimoInsumo,
+    setStockMinimoInsumo,
+    setUnidadDeLongitud,
+    insumoRespecto,
+    handleInputs,
+    handleDropdowns,
+  } = useContext(contextStateProps);
 
   const getComponentInsumosRespecto = (unidadMedida: string) => {
     let componentToReturn;
     if (unidadMedida === 'peso') {
-      componentToReturn = (
-        <InsumoRespectoPesoForm
-          {...{
-            unidadDePeso,
-            pesoInsumo,
-            handleInputs,
-            handleDropdowns,
-          }}
-        />
-      );
+      componentToReturn = <InsumoRespectoPesoForm />;
     } else if (unidadMedida === 'longitud') {
-      componentToReturn = (
-        <InsumoRespectoLongitud
-          {...{
-            unidadDeLongitud,
-            altoInsumo,
-            largoInsumo,
-            handleInputs,
-            handleDropdowns,
-          }}
-        />
-      );
+      componentToReturn = <InsumoRespectoLongitud />;
     } else if (unidadMedida === 'volumen') {
-      componentToReturn = (
-        <InsumoRespectoVolumen
-          {...{
-            unidadDeVolumen,
-            volumenInsumo,
-            handleInputs,
-            handleDropdowns,
-          }}
-        />
-      );
+      componentToReturn = <InsumoRespectoVolumen />;
     } else {
       componentToReturn = null;
     }
@@ -233,17 +142,11 @@ const InsumosModal = ({ showModal, setShowModal }: IModal) => {
 
           <hr style={{ marginTop: '30px' }} />
 
-          <InsumoCantidades {...{ unidadesPorPaquete, costoPaquete, handleInputs }} />
+          <InsumoCantidades />
 
           <hr style={{ marginTop: '30px' }} />
 
-          <InsumosStock
-            {...{
-              stockInsumo,
-              stockMinimoInsumo,
-              handleInputs,
-            }}
-          />
+          <InsumosStock />
 
           <div className='d-grid gap-2'>
             <Button
