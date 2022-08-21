@@ -1,20 +1,20 @@
 import { useContext, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { contextStateProps } from '../../ContextStateWrapper';
-import { LOGIN } from '../mutations/mutations';
+import { useLoginMutation } from '../../generated/schema';
 import InsumosModal from './insumosModal/InsumosModal';
 import InsumosTable from './insumosTable/InsumosTable';
-import { useMutation } from '@apollo/client';
-import { LoginMutation } from '../../generated/graphql';
 
 const Insumos = () => {
   const { setShowModal } = useContext(contextStateProps);
-  const [login] = useMutation<LoginMutation>(LOGIN);
+  const [login] = useLoginMutation();
+
+  // const [login] = useMutation<LoginMutation>(LOGIN);
   useEffect(() => {
     login({
       variables: {
-        username: process.env.REACT_APP_USERNAME,
-        password: process.env.REACT_APP_PASSWORD,
+        username: process.env.REACT_APP_USERNAME ?? '',
+        password: process.env.REACT_APP_PASSWORD ?? '',
       },
     }).then(({ data }) => {
       const { tokenAuth } = data || {};

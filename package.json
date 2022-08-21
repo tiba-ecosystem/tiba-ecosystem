@@ -32,7 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --require dotenv/config"
   },
   "eslintConfig": {
     "extends": [
@@ -61,7 +61,8 @@
     "prettier": "^2.7.1",
     "@graphql-codegen/typescript": "2.7.3",
     "@graphql-codegen/typescript-react-apollo": "3.3.3",
-    "@graphql-codegen/typescript-operations": "2.5.3"
+    "@graphql-codegen/typescript-operations": "2.5.3",
+    "@graphql-codegen/introspection": "2.2.1"
   },
   "resolutions": {
     "autoprefixer": "10.4.5"

@@ -1,0 +1,13 @@
+query ObtenerProveedores {
+  proveedores {
+    id
+    nombre
+    telefono
+    insumoSet {
+      id
+    }
+    productoSet {
+      id
+    }
+  }
+}

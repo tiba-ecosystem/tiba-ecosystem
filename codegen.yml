@@ -1,11 +1,12 @@
 overwrite: true
-schema: 'http://34.192.200.70/api/'
-documents: './src/components/**/*.{ts,tsx}'
+schema: ${REACT_APP_ENDPOINT}
+documents: 'src/**/*.{gql,graphql}'
 generates:
-  src/generated/graphql.tsx:
+  src/generated/schema.ts:
     plugins:
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
-    config:
-      withHooks: true
+  ./graphql.schema.json:
+    plugins:
+      - 'introspection'
