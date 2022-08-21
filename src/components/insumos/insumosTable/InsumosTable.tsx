@@ -1,6 +1,8 @@
 import { Button, Table } from 'react-bootstrap';
 import { IInsumo, insumosDB } from '../DB';
 
+import { Trash, Pencil, Telephone } from 'react-bootstrap-icons';
+
 const InsumosTable = () => {
   return (
     <div className='mt-4'>
@@ -15,7 +17,7 @@ const InsumosTable = () => {
             <th>Stock del insumo (unidades)</th>
             <th>Coste total del insumo</th>
             <th>Stock minimo de inventario (unidades)</th>
-            <th>Opciones</th>
+            <th style={{ width: '10rem' }}>Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -36,9 +38,17 @@ const InsumosTable = () => {
                 <td>{costoInsumo}</td>
                 <td>{stockMinimo}</td>
                 <td>
-                  <Button>Eliminar</Button>
-                  <Button>Editar</Button>
-                  <Button>Llamar</Button>
+                  <div className='d-flex justify-content-between'>
+                    <Button variant='secondary'>
+                      <Pencil />
+                    </Button>
+                    <Button variant='secondary'>
+                      <Trash />
+                    </Button>
+                    <Button variant='secondary'>
+                      <Telephone />
+                    </Button>
+                  </div>
                 </td>
               </tr>
             );

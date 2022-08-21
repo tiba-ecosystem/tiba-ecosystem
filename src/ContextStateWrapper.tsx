@@ -64,7 +64,7 @@ const ContextStateWrapper = (props: any) => {
   const [volumenInsumo, setVolumenInsumo] = useState<string>('');
   const [insumoRespecto, setInsumoRespecto] = useState<string>('peso');
   const [showSignInModal, setShowSignInModal] = useState<boolean>(false);
-  const [currentScreen, setCurrentScreen] = useState<string>('homePage');
+  const [currentScreen, setCurrentScreen] = useState<string>('insumos');
 
   const handleInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
