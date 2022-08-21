@@ -17,7 +17,7 @@ const InsumosTable = () => {
             <th>Stock del insumo (unidades)</th>
             <th>Coste total del insumo</th>
             <th>Stock minimo de inventario (unidades)</th>
-            <th style={{ width: '10rem' }}>Opciones</th>
+            <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@ const InsumosTable = () => {
                 <td>{stock}</td>
                 <td>{costoInsumo}</td>
                 <td>{stockMinimo}</td>
-                <td>
+                <td style={{ width: '10rem' }}>
                   <div className='d-flex justify-content-between'>
                     <Button variant='secondary'>
                       <Pencil />
