@@ -1,22 +1,30 @@
 import Insumos from './components/insumos/Insumos';
-import ContextStateWrapper from './ContextStateWrapper';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { contextStateProps } from './ContextStateWrapper';
 import './styles.css';
+import EncubeNavbar from './components/navbar/EncubeNavbar';
+import Categorias from './components/categorias/Categorias';
+import { useContext, useState, useEffect } from 'react';
+import HomePage from './components/HomePage';
 
 function App() {
-  const client = new ApolloClient({
-    uri: 'http://34.192.200.70/api/',
-    cache: new InMemoryCache(),
-  });
+  const { currentScreen } = useContext(contextStateProps);
+  const [screen, setScreen] = useState(<HomePage />);
+
+  useEffect(() => {
+    if (currentScreen === 'categorias') {
+      setScreen(<Categorias />);
+    } else if (currentScreen === 'insumos') {
+      setScreen(<Insumos />);
+    } else {
+      setScreen(<HomePage />);
+    }
+  }, [currentScreen]);
 
   return (
-    <ApolloProvider client={client}>
-      <ContextStateWrapper>
-        <div className='mx-5 my-5'>
-          <Insumos />
-        </div>
-      </ContextStateWrapper>
-    </ApolloProvider>
+    <>
+      <EncubeNavbar />
+      {<div className='mx-5 my-5'>{screen}</div>}
+    </>
   );
 }
 

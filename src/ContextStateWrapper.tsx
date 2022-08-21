@@ -1,8 +1,8 @@
 import React, { createContext, useState } from 'react';
 
 export interface ContextProps {
-  showModal: boolean;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showAgregarInsumoModal: boolean;
+  setShowAgregarInsumoModal: React.Dispatch<React.SetStateAction<boolean>>;
   nombreProveedor: string;
   setNombreProveedor: React.Dispatch<React.SetStateAction<string>>;
   telefono: string;
@@ -35,6 +35,10 @@ export interface ContextProps {
   setVolumenInsumo: React.Dispatch<React.SetStateAction<string>>;
   insumoRespecto: string;
   setInsumoRespecto: React.Dispatch<React.SetStateAction<string>>;
+  showSignInModal: boolean;
+  setShowSignInModal: React.Dispatch<React.SetStateAction<boolean>>;
+  currentScreen: string;
+  setCurrentScreen: React.Dispatch<React.SetStateAction<string>>;
   handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleDropdowns: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -59,6 +63,8 @@ const ContextStateWrapper = (props: any) => {
   const [unidadDeVolumen, setUnidadDeVolumen] = useState<string>('milímetro cúbico');
   const [volumenInsumo, setVolumenInsumo] = useState<string>('');
   const [insumoRespecto, setInsumoRespecto] = useState<string>('peso');
+  const [showSignInModal, setShowSignInModal] = useState<boolean>(false);
+  const [currentScreen, setCurrentScreen] = useState<string>('homePage');
 
   const handleInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -129,8 +135,8 @@ const ContextStateWrapper = (props: any) => {
   return (
     <contextStateProps.Provider
       value={{
-        showModal,
-        setShowModal,
+        showAgregarInsumoModal: showModal,
+        setShowAgregarInsumoModal: setShowModal,
         nombreProveedor,
         setNombreProveedor,
         telefono,
@@ -163,6 +169,10 @@ const ContextStateWrapper = (props: any) => {
         setVolumenInsumo,
         insumoRespecto,
         setInsumoRespecto,
+        showSignInModal,
+        setShowSignInModal,
+        currentScreen,
+        setCurrentScreen,
         handleInputs,
         handleDropdowns,
       }}

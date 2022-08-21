@@ -11,8 +11,8 @@ import InsumosStock from './InsumosStock';
 
 const InsumosModal = () => {
   const {
-    showModal,
-    setShowModal,
+    showAgregarInsumoModal: showModal,
+    setShowAgregarInsumoModal: setShowModal,
     nombreProveedor,
     setNombreProveedor,
     telefono,
