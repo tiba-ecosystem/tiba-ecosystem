@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import DatalistInput from 'react-datalist-input';
 import { insumosDB, proveedoresDB } from '../DB';
@@ -10,6 +10,9 @@ import InsumoRespectoVolumen from './insumosMedidas/InsumoRespectoVolumen';
 import InsumosStock from './InsumosStock';
 
 const InsumosModal = () => {
+  const [value, setValue] = useState('');
+  const [medidaComponent, setMedidaComponent] = useState(<InsumoRespectoPesoForm />);
+
   const {
     showAgregarInsumoModal,
     setShowAgregarInsumoModal,
@@ -34,21 +37,14 @@ const InsumosModal = () => {
     handleDropdowns,
   } = useContext(insumosContext);
 
-  const getComponentInsumosRespecto = (unidadMedida: string) => {
-    let componentToReturn;
-    if (unidadMedida === 'peso') {
-      componentToReturn = <InsumoRespectoPesoForm />;
-    } else if (unidadMedida === 'longitud') {
-      componentToReturn = <InsumoRespectoLongitud />;
-    } else if (unidadMedida === 'volumen') {
-      componentToReturn = <InsumoRespectoVolumen />;
-    } else {
-      componentToReturn = null;
-    }
-    return componentToReturn;
-  };
-
-  const [value, setValue] = useState('');
+  useEffect(() => {
+    const yay: { [key: string]: JSX.Element } = {
+      peso: <InsumoRespectoPesoForm />,
+      longitud: <InsumoRespectoLongitud />,
+      volumen: <InsumoRespectoVolumen />,
+    };
+    setMedidaComponent(yay[insumoRespecto]);
+  }, [insumoRespecto]);
 
   return (
     <Modal show={showAgregarInsumoModal} onHide={() => setShowAgregarInsumoModal(false)}>
@@ -138,7 +134,8 @@ const InsumosModal = () => {
             </Form.Select>
           </Form.Group>
           <br />
-          {getComponentInsumosRespecto(insumoRespecto)}
+
+          {medidaComponent}
 
           <hr style={{ marginTop: '30px' }} />
 
