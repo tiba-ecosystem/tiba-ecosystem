@@ -38,12 +38,12 @@ const InsumosModal = () => {
   } = useContext(insumosContext);
 
   useEffect(() => {
-    const yay: { [key: string]: JSX.Element } = {
+    const medidaComponents: { [key: string]: JSX.Element } = {
       peso: <InsumoRespectoPesoForm />,
       longitud: <InsumoRespectoLongitud />,
       volumen: <InsumoRespectoVolumen />,
     };
-    setMedidaComponent(yay[insumoRespecto]);
+    setMedidaComponent(medidaComponents[insumoRespecto]);
   }, [insumoRespecto]);
 
   return (

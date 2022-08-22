@@ -62,69 +62,37 @@ const InsumosContext = () => {
   const [insumoRespecto, setInsumoRespecto] = useState<string>('peso');
 
   const handleInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
+    const { value: inputValue, name: inputName } = event.target;
 
-    switch (event.target.name) {
-      case 'nombreProveedor':
-        setNombreProveedor(inputValue);
-        break;
-      case 'telefono':
-        setTelefono(inputValue);
-        break;
-      case 'nombreInsumo':
-        setNombreInsumo(inputValue);
-        break;
-      case 'categoriaInsumo':
-        setCategoriaInsumo(inputValue);
-        break;
-      case 'unidadesPorPaquete':
-        setUnidadesPorPaquete(inputValue);
-        break;
-      case 'costoPaquete':
-        setCostoPaquete(inputValue);
-        break;
-      case 'pesoInsumo':
-        setPesoInsumo(inputValue);
-        break;
-      case 'stockInsumo':
-        setStockInsumo(inputValue);
-        break;
-      case 'stockMinimoInsumo':
-        setStockMinimoInsumo(inputValue);
-        break;
-      case 'largoInsumo':
-        setLargoInsumo(inputValue);
-        break;
-      case 'altoInsumo':
-        setAltoInsumo(inputValue);
-        break;
-      case 'volumenInsumo':
-        setVolumenInsumo(inputValue);
-        break;
-      default:
-        throw Error('Input does not exist');
-    }
+    const inputs: { [key: string]: StringStateSetter } = {
+      nombreProveedor: setNombreProveedor,
+      telefono: setTelefono,
+      nombreInsumo: setNombreInsumo,
+      categoriaInsumo: setCategoriaInsumo,
+      unidadesPorPaquete: setUnidadesPorPaquete,
+      costoPaquete: setCostoPaquete,
+      pesoInsumo: setPesoInsumo,
+      stockInsumo: setStockInsumo,
+      stockMinimoInsumo: setStockMinimoInsumo,
+      largoInsumo: setLargoInsumo,
+      altoInsumo: setAltoInsumo,
+      volumenInsumo: setVolumenInsumo,
+    };
+
+    inputs[inputName](inputValue);
   };
 
   const handleDropdowns = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const inputValue = event.target.value;
+    const { value: inputValue, id: inputId } = event.target;
 
-    switch (event.target.id) {
-      case 'unidadDeLongitud':
-        setUnidadDeLongitud(inputValue);
-        break;
-      case 'unidadDePeso':
-        setUnidadDePeso(inputValue);
-        break;
-      case 'unidadDeVolumen':
-        setUnidadDeVolumen(inputValue);
-        break;
-      case 'insumoRespecto':
-        setInsumoRespecto(inputValue);
-        break;
-      default:
-        throw Error('Input does not exist');
-    }
+    const dropdowns: { [key: string]: StringStateSetter } = {
+      unidadDeLongitud: setUnidadDeLongitud,
+      unidadDePeso: setUnidadDePeso,
+      unidadDeVolumen: setUnidadDeVolumen,
+      insumoRespecto: setInsumoRespecto,
+    };
+
+    dropdowns[inputId](inputValue);
   };
 
   return (
