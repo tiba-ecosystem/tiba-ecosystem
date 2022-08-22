@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import Insumos from './Insumos';
 
 export interface ContextProps {
   showAgregarInsumoModal: boolean;
@@ -41,7 +42,7 @@ export interface ContextProps {
 
 export const insumosContext = createContext<ContextProps>({} as ContextProps);
 
-const InsumosContext = (props: any) => {
+const InsumosContext = () => {
   const [showAgregarInsumoModal, setShowAgregarInsumoModal] = useState(false);
   const [nombreProveedor, setNombreProveedor] = useState<string>('');
   const [telefono, setTelefono] = useState<string>('');
@@ -167,7 +168,7 @@ const InsumosContext = (props: any) => {
         handleDropdowns,
       }}
     >
-      {props.children}
+      <Insumos />
     </insumosContext.Provider>
   );
 };

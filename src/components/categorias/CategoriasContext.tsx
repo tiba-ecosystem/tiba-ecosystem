@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import Categorias from './Categorias';
 
 export interface ContextProps {
   showAgregarCategoriaModal: boolean;
@@ -7,7 +8,7 @@ export interface ContextProps {
 
 export const categoriasContext = createContext<ContextProps>({} as ContextProps);
 
-const CategoriasContext = (props: any) => {
+const CategoriasContext = () => {
   const [showAgregarCategoriaModal, setShowAgregarCategoriaModal] = useState(false);
 
   return (
@@ -17,7 +18,7 @@ const CategoriasContext = (props: any) => {
         setShowAgregarCategoriaModal,
       }}
     >
-      {props.children}
+      <Categorias />
     </categoriasContext.Provider>
   );
 };
