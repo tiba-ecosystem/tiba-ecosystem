@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import { Form, Button, Modal } from 'react-bootstrap';
-import { contextStateProps } from '../../ContextStateWrapper';
+import { globalContext } from '../../GlobalContext';
 import { useLoginMutation } from '../../generated/schema';
 
 const SignInModal = () => {
-  const { showSignInModal, setShowSignInModal } = useContext(contextStateProps);
+  const { showSignInModal, setShowSignInModal } = useContext(globalContext);
   const [username, setUsername] = useState<string>(process.env.REACT_APP_USERNAME ?? '');
   const [password, setPassword] = useState<string>(process.env.REACT_APP_PASSWORD ?? '');
   const [login] = useLoginMutation();

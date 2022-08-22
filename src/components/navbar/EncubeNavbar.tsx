@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Container, Nav, NavDropdown, Form, Button, Navbar } from 'react-bootstrap';
-import { contextStateProps } from '../../ContextStateWrapper';
+import { globalContext } from '../../GlobalContext';
 
 const EncubeNavbar = () => {
-  const { setShowSignInModal, setCurrentScreen } = useContext(contextStateProps);
+  const { setShowSignInModal, setCurrentScreen } = useContext(globalContext);
 
   return (
     <Navbar bg='light' expand='lg'>

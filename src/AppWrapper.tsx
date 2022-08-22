@@ -1,4 +1,4 @@
-import ContextStateWrapper from './ContextStateWrapper';
+import GlobalContext from './GlobalContext';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import './styles.css';
 import App from './App';
@@ -11,9 +11,9 @@ function AppWrapper() {
 
   return (
     <ApolloProvider client={client}>
-      <ContextStateWrapper>
+      <GlobalContext>
         <App />
-      </ContextStateWrapper>
+      </GlobalContext>
     </ApolloProvider>
   );
 }

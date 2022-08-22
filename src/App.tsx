@@ -1,20 +1,21 @@
-import Insumos from './components/insumos/Insumos';
-import { contextStateProps } from './ContextStateWrapper';
+import { globalContext } from './GlobalContext';
 import './styles.css';
 import EncubeNavbar from './components/navbar/EncubeNavbar';
-import Categorias from './components/categorias/Categorias';
 import { useContext, useState, useEffect } from 'react';
 import HomePage from './components/HomePage';
+import SignInModal from './components/signInModal/SignInModal';
+import InsumosWrapper from './components/insumos/InsumosWrapper';
+import CategoriasWrapper from './components/categorias/CategoriasWrapper';
 
 function App() {
-  const { currentScreen } = useContext(contextStateProps);
+  const { currentScreen } = useContext(globalContext);
   const [screen, setScreen] = useState(<HomePage />);
 
   useEffect(() => {
     if (currentScreen === 'categorias') {
-      setScreen(<Categorias />);
+      setScreen(<CategoriasWrapper />);
     } else if (currentScreen === 'insumos') {
-      setScreen(<Insumos />);
+      setScreen(<InsumosWrapper />);
     } else {
       setScreen(<HomePage />);
     }
@@ -23,6 +24,7 @@ function App() {
   return (
     <>
       <EncubeNavbar />
+      <SignInModal />
       {<div className='mx-5 my-5'>{screen}</div>}
     </>
   );

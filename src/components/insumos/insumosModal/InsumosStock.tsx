@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Form } from 'react-bootstrap';
-import { contextStateProps } from '../../../ContextStateWrapper';
+import { insumosContext } from '../InsumosContext';
 
 const InsumosStock = () => {
-  const { stockInsumo, stockMinimoInsumo, handleInputs } = useContext(contextStateProps);
+  const { stockInsumo, stockMinimoInsumo, handleInputs } = useContext(insumosContext);
   return (
     <div className='mt-3'>
       <Form.Group className='mb-3' controlId='formGridAddress2'>

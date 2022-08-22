@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useContext } from 'react';
 
 import { Col, Form, Row } from 'react-bootstrap';
-import { contextStateProps } from '../../../../ContextStateWrapper';
+import { insumosContext } from '../../InsumosContext';
 
 export interface IInsumosRespectoCantidades {
   unidadesPorPaquete: string;
@@ -11,7 +11,7 @@ export interface IInsumosRespectoCantidades {
 
 function InsumoCantidades() {
   const { unidadesPorPaquete, costoPaquete, /* costoUnidad, */ handleInputs } =
-    useContext(contextStateProps);
+    useContext(insumosContext);
 
   const costoPorUnidad = Number(costoPaquete) / Number(unidadesPorPaquete);
 

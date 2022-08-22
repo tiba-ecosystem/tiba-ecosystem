@@ -35,18 +35,14 @@ export interface ContextProps {
   setVolumenInsumo: React.Dispatch<React.SetStateAction<string>>;
   insumoRespecto: string;
   setInsumoRespecto: React.Dispatch<React.SetStateAction<string>>;
-  showSignInModal: boolean;
-  setShowSignInModal: React.Dispatch<React.SetStateAction<boolean>>;
-  currentScreen: string;
-  setCurrentScreen: React.Dispatch<React.SetStateAction<string>>;
   handleInputs: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleDropdowns: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const contextStateProps = createContext<ContextProps>({} as ContextProps);
+export const insumosContext = createContext<ContextProps>({} as ContextProps);
 
-const ContextStateWrapper = (props: any) => {
-  const [showModal, setShowModal] = useState(false);
+const InsumosContext = (props: any) => {
+  const [showAgregarInsumoModal, setShowAgregarInsumoModal] = useState(false);
   const [nombreProveedor, setNombreProveedor] = useState<string>('');
   const [telefono, setTelefono] = useState<string>('');
   const [nombreInsumo, setNombreInsumo] = useState<string>('');
@@ -63,8 +59,6 @@ const ContextStateWrapper = (props: any) => {
   const [unidadDeVolumen, setUnidadDeVolumen] = useState<string>('milímetro cúbico');
   const [volumenInsumo, setVolumenInsumo] = useState<string>('');
   const [insumoRespecto, setInsumoRespecto] = useState<string>('peso');
-  const [showSignInModal, setShowSignInModal] = useState<boolean>(false);
-  const [currentScreen, setCurrentScreen] = useState<string>('insumos');
 
   const handleInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -133,10 +127,10 @@ const ContextStateWrapper = (props: any) => {
   };
 
   return (
-    <contextStateProps.Provider
+    <insumosContext.Provider
       value={{
-        showAgregarInsumoModal: showModal,
-        setShowAgregarInsumoModal: setShowModal,
+        showAgregarInsumoModal,
+        setShowAgregarInsumoModal,
         nombreProveedor,
         setNombreProveedor,
         telefono,
@@ -169,17 +163,13 @@ const ContextStateWrapper = (props: any) => {
         setVolumenInsumo,
         insumoRespecto,
         setInsumoRespecto,
-        showSignInModal,
-        setShowSignInModal,
-        currentScreen,
-        setCurrentScreen,
         handleInputs,
         handleDropdowns,
       }}
     >
       {props.children}
-    </contextStateProps.Provider>
+    </insumosContext.Provider>
   );
 };
 
-export default ContextStateWrapper;
+export default InsumosContext;

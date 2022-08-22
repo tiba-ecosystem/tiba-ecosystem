@@ -1,64 +1,65 @@
-import React, { useContext, useState } from 'react';
-import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
-import DatalistInput from 'react-datalist-input';
-import { insumosDB, proveedoresDB } from '../DB';
-import { insumosContext } from '../InsumosContext';
-import InsumoCantidades from './insumosMedidas/InsumoCantidades';
-import InsumoRespectoLongitud from './insumosMedidas/InsumoRespectoLongitud';
-import InsumoRespectoPesoForm from './insumosMedidas/InsumoRespectoPeso';
-import InsumoRespectoVolumen from './insumosMedidas/InsumoRespectoVolumen';
-import InsumosStock from './InsumosStock';
+import React, { useContext /* , useState */ } from 'react';
+import { /* Button, Col,  */ Form, Modal /* , Row */ } from 'react-bootstrap';
+// import DatalistInput from 'react-datalist-input';
+import { categoriasContext } from '../CategoriasContext';
+// import { insumosDB, proveedoresDB } from '../DB';
+// import InsumoCantidades from './insumosMedidas/InsumoCantidades';
+// import InsumoRespectoLongitud from './insumosMedidas/InsumoRespectoLongitud';
+// import InsumoRespectoPesoForm from './insumosMedidas/InsumoRespectoPeso';
+// import InsumoRespectoVolumen from './insumosMedidas/InsumoRespectoVolumen';
+// import InsumosStock from './InsumosStock';
 
-const InsumosModal = () => {
+const CategoriasModal = () => {
   const {
-    showAgregarInsumoModal,
-    setShowAgregarInsumoModal,
-    nombreProveedor,
-    setNombreProveedor,
-    telefono,
-    setTelefono,
-    nombreInsumo,
-    setNombreInsumo,
-    categoriaInsumo,
-    setCategoriaInsumo,
-    setUnidadesPorPaquete,
-    costoPaquete,
-    setCostoPaquete,
-    stockInsumo,
-    setStockInsumo,
-    stockMinimoInsumo,
-    setStockMinimoInsumo,
-    setUnidadDeLongitud,
-    insumoRespecto,
-    handleInputs,
-    handleDropdowns,
-  } = useContext(insumosContext);
+    showAgregarCategoriaModal,
+    setShowAgregarCategoriaModal,
+    // nombreProveedor,
+    // setNombreProveedor,
+    // telefono,
+    // setTelefono,
+    // nombreInsumo,
+    // setNombreInsumo,
+    // categoriaInsumo,
+    // setCategoriaInsumo,
+    // setUnidadesPorPaquete,
+    // costoPaquete,
+    // setCostoPaquete,
+    // stockInsumo,
+    // setStockInsumo,
+    // stockMinimoInsumo,
+    // setStockMinimoInsumo,
+    // setUnidadDeLongitud,
+    // insumoRespecto,
+    // handleInputs,
+    // handleDropdowns,
+  } = useContext(categoriasContext);
 
-  const getComponentInsumosRespecto = (unidadMedida: string) => {
-    let componentToReturn;
-    if (unidadMedida === 'peso') {
-      componentToReturn = <InsumoRespectoPesoForm />;
-    } else if (unidadMedida === 'longitud') {
-      componentToReturn = <InsumoRespectoLongitud />;
-    } else if (unidadMedida === 'volumen') {
-      componentToReturn = <InsumoRespectoVolumen />;
-    } else {
-      componentToReturn = null;
-    }
-    return componentToReturn;
-  };
+  // const getComponentInsumosRespecto = (unidadMedida: string) => {
+  //   let componentToReturn;
+  //   if (unidadMedida === 'peso') {
+  //     componentToReturn = <InsumoRespectoPesoForm />;
+  //   } else if (unidadMedida === 'longitud') {
+  //     componentToReturn = <InsumoRespectoLongitud />;
+  //   } else if (unidadMedida === 'volumen') {
+  //     componentToReturn = <InsumoRespectoVolumen />;
+  //   } else {
+  //     componentToReturn = null;
+  //   }
+  //   return componentToReturn;
+  // };
 
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState('');
 
   return (
-    <Modal show={showAgregarInsumoModal} onHide={() => setShowAgregarInsumoModal(false)}>
+    <Modal show={showAgregarCategoriaModal} onHide={() => setShowAgregarCategoriaModal(false)}>
       <Modal.Header closeButton>
-        <Modal.Title>Agregar Insumo</Modal.Title>
+        <Modal.Title>Agregar Categoria</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
         <Form>
-          <DatalistInput
+          <h1>Categoria</h1>
+          {/* <DatalistInput
             label={<p style={{ marginBottom: '0.5rem' }}>Busque su proveedor</p>}
             value={value}
             setValue={setValue}
@@ -168,16 +169,16 @@ const InsumosModal = () => {
                 setStockInsumo('');
                 setStockMinimoInsumo('');
                 setUnidadDeLongitud('');
-                setShowAgregarInsumoModal(false);
+                setShowModal(false);
               }}
             >
               Agregar Insumo
             </Button>
-          </div>
+          </div> */}
         </Form>
       </Modal.Body>
     </Modal>
   );
 };
 
-export default InsumosModal;
+export default CategoriasModal;

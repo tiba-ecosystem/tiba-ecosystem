@@ -39,13 +39,13 @@ const InsumosTable = () => {
                 <td>{stockMinimo}</td>
                 <td style={{ width: '10rem' }}>
                   <div className='d-flex justify-content-between'>
-                    <Button variant='secondary'>
+                    <Button variant='secondary' className='mx-1'>
                       <Pencil />
                     </Button>
-                    <Button variant='secondary'>
+                    <Button variant='secondary' className='mx-1'>
                       <Trash />
                     </Button>
-                    <Button variant='secondary'>
+                    <Button variant='secondary' className='mx-1'>
                       <Telephone />
                     </Button>
                   </div>
