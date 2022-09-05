@@ -14,18 +14,17 @@ export type Scalars = {
   Int: number;
   Float: number;
   Decimal: any;
-  GenericScalar: any;
   Upload: any;
 };
 
 export type CategoriaDelete = {
   __typename?: 'CategoriaDelete';
-  estado?: Maybe<Scalars['Boolean']>;
+  eliminacionEfectuada?: Maybe<Scalars['Boolean']>;
 };
 
 export type CategoriaInsumoDelete = {
   __typename?: 'CategoriaInsumoDelete';
-  estado?: Maybe<Scalars['Boolean']>;
+  eliminacionEfectuada?: Maybe<Scalars['Boolean']>;
 };
 
 export type CategoriaInsumoMutation = {
@@ -68,7 +67,7 @@ export type CategoriaUpdate = {
 
 export type InsumoDelete = {
   __typename?: 'InsumoDelete';
-  estado?: Maybe<Scalars['Boolean']>;
+  eliminacionEfectuada?: Maybe<Scalars['Boolean']>;
 };
 
 export type InsumoMutation = {
@@ -115,19 +114,18 @@ export type Mutation = {
   guardarInsumo?: Maybe<InsumoMutation>;
   guardarProducto?: Maybe<ProductoMutation>;
   guardarProveedor?: Maybe<ProveedorMutation>;
-  refreshToken?: Maybe<Refresh>;
+  revokeToken?: Maybe<Revoke>;
   /** Obtain JSON Web Token mutation */
   tokenAuth?: Maybe<ObtainJsonWebToken>;
-  verifyToken?: Maybe<Verify>;
 };
 
 
 export type MutationActualizarCategoriaArgs = {
   categoriaPrincipal?: InputMaybe<Scalars['Int']>;
-  descripcion: Scalars['String'];
+  descripcion?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   imagen?: InputMaybe<Scalars['Upload']>;
-  nombre: Scalars['String'];
+  nombre?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -139,40 +137,40 @@ export type MutationActualizarCategoriaInsumoArgs = {
 
 export type MutationActualizarInsumoArgs = {
   alto?: InputMaybe<Scalars['Float']>;
-  categoria: Scalars['Int'];
-  costoUnidad: Scalars['Float'];
+  categoria?: InputMaybe<Scalars['Int']>;
+  costoUnidad?: InputMaybe<Scalars['Float']>;
   id?: InputMaybe<Scalars['ID']>;
   largo?: InputMaybe<Scalars['Float']>;
-  nombre: Scalars['String'];
+  nombre?: InputMaybe<Scalars['String']>;
   peso?: InputMaybe<Scalars['Float']>;
-  proveedor: Scalars['Int'];
-  stock: Scalars['Int'];
-  stockMinimo: Scalars['Int'];
+  proveedor?: InputMaybe<Scalars['Int']>;
+  stock?: InputMaybe<Scalars['Int']>;
+  stockMinimo?: InputMaybe<Scalars['Int']>;
   unidadMedida?: InputMaybe<Scalars['String']>;
   unidadPeso?: InputMaybe<Scalars['String']>;
-  unidadesPaquete: Scalars['Int'];
+  unidadesPaquete?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type MutationActualizarProductoArgs = {
-  categoria: Scalars['Int'];
-  costoUnitario: Scalars['Float'];
-  descripcion: Scalars['String'];
+  categoria?: InputMaybe<Scalars['Int']>;
+  costoUnitario?: InputMaybe<Scalars['Float']>;
+  descripcion?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
-  imagen1: Scalars['Upload'];
+  imagen1?: InputMaybe<Scalars['Upload']>;
   imagen2?: InputMaybe<Scalars['Upload']>;
-  nombre: Scalars['String'];
-  precioUnitario: Scalars['Float'];
-  proveedor: Scalars['Int'];
-  stock: Scalars['Int'];
-  stockMinimo: Scalars['String'];
+  nombre?: InputMaybe<Scalars['String']>;
+  precioUnitario?: InputMaybe<Scalars['Float']>;
+  proveedor?: InputMaybe<Scalars['Int']>;
+  stock?: InputMaybe<Scalars['Int']>;
+  stockMinimo?: InputMaybe<Scalars['String']>;
 };
 
 
 export type MutationActualizarProveedorArgs = {
   id?: InputMaybe<Scalars['ID']>;
-  nombre: Scalars['String'];
-  telefono: Scalars['String'];
+  nombre?: InputMaybe<Scalars['String']>;
+  telefono?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -250,19 +248,14 @@ export type MutationGuardarProveedorArgs = {
 };
 
 
-export type MutationRefreshTokenArgs = {
-  token: Scalars['String'];
+export type MutationRevokeTokenArgs = {
+  refreshToken: Scalars['String'];
 };
 
 
 export type MutationTokenAuthArgs = {
   password: Scalars['String'];
   username: Scalars['String'];
-};
-
-
-export type MutationVerifyTokenArgs = {
-  token: Scalars['String'];
 };
 
 /** Obtain JSON Web Token mutation */
@@ -273,7 +266,7 @@ export type ObtainJsonWebToken = {
 
 export type ProductoDelete = {
   __typename?: 'ProductoDelete';
-  estado?: Maybe<Scalars['Boolean']>;
+  eliminacionEfectuada?: Maybe<Scalars['Boolean']>;
 };
 
 export type ProductoMutation = {
@@ -303,7 +296,7 @@ export type ProductoUpdate = {
 
 export type ProveedorDelete = {
   __typename?: 'ProveedorDelete';
-  estado?: Maybe<Scalars['Boolean']>;
+  eliminacionEfectuada?: Maybe<Scalars['Boolean']>;
 };
 
 export type ProveedorMutation = {
@@ -327,17 +320,26 @@ export type ProveedorUpdate = {
 
 export type Query = {
   __typename?: 'Query';
+  categoria?: Maybe<CategoriaType>;
   categoriaInsumo?: Maybe<CategoriaInsumoType>;
+  categorias?: Maybe<Array<Maybe<CategoriaType>>>;
   categoriasInsumos?: Maybe<Array<Maybe<CategoriaInsumoType>>>;
   insumo?: Maybe<InsumoType>;
   insumos?: Maybe<Array<Maybe<InsumoType>>>;
+  producto?: Maybe<ProductoType>;
+  productos?: Maybe<Array<Maybe<ProductoType>>>;
   proveedor?: Maybe<ProveedorType>;
   proveedores?: Maybe<Array<Maybe<ProveedorType>>>;
 };
 
 
-export type QueryCategoriaInsumoArgs = {
+export type QueryCategoriaArgs = {
   id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryCategoriaInsumoArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -346,19 +348,18 @@ export type QueryInsumoArgs = {
 };
 
 
+export type QueryProductoArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
 export type QueryProveedorArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
-export type Refresh = {
-  __typename?: 'Refresh';
-  payload?: Maybe<Scalars['GenericScalar']>;
-  token?: Maybe<Scalars['String']>;
-};
-
-export type Verify = {
-  __typename?: 'Verify';
-  payload?: Maybe<Scalars['GenericScalar']>;
+export type Revoke = {
+  __typename?: 'Revoke';
+  revoked?: Maybe<Scalars['Int']>;
 };
 
 export type LoginMutationVariables = Exact<{
